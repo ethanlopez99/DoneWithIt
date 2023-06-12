@@ -1,16 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet,
+  View, 
+  Image,
+  Dimensions
+} from 'react-native';
+import { ImageBackground } from 'react-native-web';
 
 export default function App() {
-  let x = 1;
-  console.log("App Executed")
-  console.log(x)
+  const height = Dimensions.get('screen')
+  console.log(height)
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={
+      styles.container
+    }>
+      <ImageBackground source={require('./assets/background.jpg')}/>
+
     </View>
-  );
+    
+    );
 }
 
 const styles = StyleSheet.create({
