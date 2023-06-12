@@ -1,19 +1,22 @@
 import { StyleSheet,
   View, 
   Image,
-  Dimensions
+  Dimensions,
+  ImageBackground,
+  Text
 } from 'react-native';
-import { ImageBackground } from 'react-native-web';
+import React from "react"
+
 
 export default function App() {
   const height = Dimensions.get('screen')
   console.log(height)
   return (
-    <View style={
-      styles.container
-    }>
-      <ImageBackground source={require('./assets/background.jpg')}/>
-
+    <View style={styles.container}>
+      <ImageBackground source={require("./assets/background.jpg")} style={styles.image}>
+          <Image source={require("./assets/logo-red.png")} style={styles.logo} />
+          <Text style={styles.label}>Test</Text>
+        </ImageBackground>
     </View>
     
     );
@@ -26,4 +29,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  image: {
+    height: '100%',
+    width: '100%',
+    flex: 1,
+  },
+  logo: {
+    width: 100,
+    alignSelf: 'center',
+    flex: 0.4,
+    resizeMode: 'contain'
+  },
+  label: {
+    textAlign: 'center',
+    
+    }
 });
