@@ -7,6 +7,7 @@ import ListItemSeparator from "../components/ListItemSeparator";
 import { StyleSheet, View, FlatList } from "react-native";
 
 import colors from "../config/colors";
+import WelcomeScreen from "./WelcomeScreen";
 const menuItems = [
   {
     title: "My Listings",
@@ -47,6 +48,7 @@ function AccountScreen(props) {
                   backgroundColor={item.icon.backgroundColor}
                 />
               }
+              onPress={() => 0}
             />
           )}
           ItemSeparatorComponent={<ListItemSeparator />}
