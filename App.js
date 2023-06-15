@@ -1,47 +1,24 @@
-import { StyleSheet,
-  View, 
+import {
+  StyleSheet,
+  View,
   Image,
   Dimensions,
   ImageBackground,
-  Text
-} from 'react-native';
-import React from "react"
+  Text,
+} from "react-native";
 
+import React from "react";
+import WelcomeScreen from "./app/screens/WelcomeScreen";
+import ViewImageScreen from "./app/screens/ViewImageScreen";
+import TestScreen from "./app/screens/TestScreen";
+import Card from "./app/components/Card";
+import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
+import MessagesScreen from "./app/screens/MessagesScreen";
+import Icon from "./app/components/Icon";
+import Screen from "./app/components/Screen";
+import ListItem from "./app/components/ListItem";
+import AccountScreen from "./app/screens/AccountScreen";
 
 export default function App() {
-  const height = Dimensions.get('screen')
-  console.log(height)
-  return (
-    <View style={styles.container}>
-      <ImageBackground source={require("./assets/background.jpg")} style={styles.image}>
-          <Image source={require("./assets/logo-red.png")} style={styles.logo} />
-          <Text style={styles.label}>Test</Text>
-        </ImageBackground>
-    </View>
-    
-    );
+  return <AccountScreen></AccountScreen>;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-    height: '100%',
-    width: '100%',
-    flex: 1,
-  },
-  logo: {
-    width: 100,
-    alignSelf: 'center',
-    flex: 0.4,
-    resizeMode: 'contain'
-  },
-  label: {
-    textAlign: 'center',
-    
-    }
-});
