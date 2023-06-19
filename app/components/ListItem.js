@@ -24,9 +24,9 @@ function ListItem({
     <GestureHandlerRootView style={style}>
       <Swipeable renderRightActions={renderRightActions}>
         <TouchableHighlight onPress={onPress} underlayColor="lightgray">
-          <View style={styles.user_containter}>
+          <View style={styles.container}>
             {ImageComponent}
-            {image && <Image source={image} style={styles.user_image} />}
+            {image && <Image source={image} style={styles.image} />}
             <View
               style={{
                 marginLeft: 15,
@@ -48,12 +48,12 @@ function ListItem({
 export default ListItem;
 
 const styles = StyleSheet.create({
-  user_containter: {
+  container: {
     padding: 15,
     flexDirection: "row",
     backgroundColor: "#fff",
   },
-  user_image: {
+  image: {
     height: 60,
     width: 60,
     borderRadius: 30,

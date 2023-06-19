@@ -7,10 +7,10 @@ function Card(props) {
       <Image source={props.image} style={styles.image}></Image>
       <View style={styles.details_container}>
         <Text style={[styles.text, { color: "black", marginBottom: 7 }]}>
-          {props.children}
+          {props.title}
         </Text>
         <Text style={[styles.text, { color: "green", fontWeight: "bold" }]}>
-          {props.price}
+          {props.description}
         </Text>
       </View>
     </View>

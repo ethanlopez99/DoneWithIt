@@ -54,6 +54,13 @@ function AccountScreen(props) {
           ItemSeparatorComponent={<ListItemSeparator />}
         ></FlatList>
       </View>
+      <View style={styles.container}>
+        <ListItem
+          title="Log Out"
+          ImageComponent={<Icon name="logout" backgroundColor="gold" />}
+          onPress={() => 0}
+        />
+      </View>
     </Screen>
   );
 }
