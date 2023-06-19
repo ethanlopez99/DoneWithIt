@@ -1,15 +1,29 @@
 import React from "react";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useState } from "react";
 
-import { StyleSheet, View } from "react-native";
-import colors from "../config/colors";
-import AppText from "../components/AppText";
-import Card from "../components/Card";
+import { StyleSheet, TextInput, Text, Switch } from "react-native";
+
+import Screen from "../components/Screen";
+
 function TestScreen(props) {
-  return <MaterialCommunityIcons name="close" size={100} color="green" />;
+  const [isNew, setIsNew] = useState(false);
+
+  return (
+    <Screen>
+      <Switch
+        value={isNew}
+        onValueChange={(newValue) => setIsNew(newValue)}
+      ></Switch>
+    </Screen>
+  );
 }
 
 export default TestScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  text: {
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 1,
+  },
+});
