@@ -23,10 +23,12 @@ function WelcomeScreen(props) {
         </AppText>
       </View>
       <View style={styles.button_container}>
-        <AppButton color={colors.primary} onPress={() => console.log("Tapped")}>
-          LOGIN
-        </AppButton>
-        <AppButton color={colors.secondary}>REGISTER</AppButton>
+        <AppButton
+          color={colors.primary}
+          onPress={() => console.log("Tapped")}
+          title="LOGIN"
+        ></AppButton>
+        <AppButton color={colors.secondary} title="REGISTER"></AppButton>
       </View>
     </ImageBackground>
   );

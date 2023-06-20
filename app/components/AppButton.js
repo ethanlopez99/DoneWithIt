@@ -6,12 +6,17 @@ import AppText from "./AppText";
 import { TouchableOpacity } from "react-native";
 
 function AppButton(props) {
+  backColor = colors.primary;
+  if (props.color) {
+    backColor = props.color;
+  }
+
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: props.color }]}
+      style={[styles.button, { backgroundColor: backColor }]}
       onPress={props.onPress}
     >
-      <AppText>{props.children}</AppText>
+      <AppText>{props.title}</AppText>
     </TouchableOpacity>
   );
 }
