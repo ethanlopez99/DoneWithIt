@@ -11,6 +11,8 @@ import {
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 function ListItem({
   renderRightActions,
   onPress,
@@ -19,6 +21,7 @@ function ListItem({
   description,
   style,
   ImageComponent,
+  showChevron,
 }) {
   return (
     <GestureHandlerRootView style={style}>
@@ -31,13 +34,26 @@ function ListItem({
               style={{
                 marginLeft: 15,
                 justifyContent: "center",
+                flex: 1,
               }}
             >
-              <Text style={{ fontWeight: "bold" }}>{title}</Text>
+              <Text style={{ fontWeight: "bold" }} numberOfLines={2}>
+                {title}
+              </Text>
               {description && (
-                <Text style={{ color: "grey" }}>{description}</Text>
+                <Text style={{ color: "grey" }} numberOfLines={2}>
+                  {description}
+                </Text>
               )}
             </View>
+            {showChevron ? (
+              <MaterialCommunityIcons
+                name="chevron-right"
+                style={styles.chevron}
+                size={25}
+                color="grey"
+              />
+            ) : null}
           </View>
         </TouchableHighlight>
       </Swipeable>
@@ -57,5 +73,8 @@ const styles = StyleSheet.create({
     height: 60,
     width: 60,
     borderRadius: 30,
+  },
+  chevron: {
+    alignSelf: "center",
   },
 });

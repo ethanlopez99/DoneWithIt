@@ -1,6 +1,6 @@
 import React from "react";
 import AppTextInput from "../AppTextInput";
-import ErrorMessage from "../ErrorMessage";
+import ErrorMessage from "./ErrorMessage";
 import { useFormikContext } from "formik";
 
 function AppFormField({ name, ...otherProps }) {
@@ -12,6 +12,7 @@ function AppFormField({ name, ...otherProps }) {
         onChangeText={handleChange(name)}
         onBlur={() => setFieldTouched(name)}
         {...otherProps}
+        style={{ flex: 1 }}
       />
       <ErrorMessage error={errors[name]} visible={touched[name]} />
     </>

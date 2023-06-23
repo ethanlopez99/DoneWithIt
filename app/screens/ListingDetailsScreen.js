@@ -1,7 +1,7 @@
 import React from "react";
 
 import { StyleSheet, View, Image, Text } from "react-native";
-import ListItem from "../components/ListItem";
+import ListItem from "../components/lists/istItem";
 
 function ListingDetailsScreen(props) {
   return (

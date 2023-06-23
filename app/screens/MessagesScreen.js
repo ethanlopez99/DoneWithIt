@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 
-import ListItem from "../components/ListItem";
+import ListItem from "../components/lists/ListItem";
 import Screen from "../components/Screen";
-import ListItemSeparator from "../components/ListItemSeparator";
-import ListItemDeleteAction from "../components/ListItemDeleteAction";
+import ListItemSeparator from "../components/lists/ListItemSeparator";
+import ListItemDeleteAction from "../components/lists/ListItemDeleteAction";
 
 const initial_messages = [
   {
@@ -39,6 +39,8 @@ function MessagesScreen(props) {
             image={require("../assets/mosh.jpg")}
             description={item.description}
             title={item.title}
+            showChevron
+            onPress={() => console.log(item.title)}
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handle_delete(item)} />
             )}

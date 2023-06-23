@@ -6,7 +6,8 @@ import colors from "./colors";
 export default {
   inputText: {
     fontSize: 18,
-    color: colors.dark,
+    color: colors.medium,
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
   },
+  colors,
 };
