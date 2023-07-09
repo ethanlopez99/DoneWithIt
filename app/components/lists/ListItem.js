@@ -13,6 +13,8 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import colors from "../../config/colors";
+
 function ListItem({
   renderRightActions,
   onPress,
@@ -37,7 +39,7 @@ function ListItem({
                 flex: 1,
               }}
             >
-              <Text style={{ fontWeight: "bold" }} numberOfLines={2}>
+              <Text style={{ fontWeight: "bold" }} numberOfLines={1}>
                 {title}
               </Text>
               {description && (
@@ -51,7 +53,7 @@ function ListItem({
                 name="chevron-right"
                 style={styles.chevron}
                 size={25}
-                color="grey"
+                color={colors.medium}
               />
             ) : null}
           </View>

@@ -1,54 +1,66 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
 
 import Card from "../components/Card";
 import Screen from "../components/Screen";
 
+import listingsAPI from "../api/listings";
+
 import colors from "../config/colors";
 
+import routes from "../navigation/routes";
+
 import { useState } from "react";
+import AppText from "../components/AppText";
+import AppButton from "../components/AppButton";
+import ActivityIndicator from "../components/ActivityIndicator";
 
-initial_listings = [
-  {
-    id: 1,
-    title: "Red jacket for sale",
-    price: "$100",
-    image: require("../assets/jacket.jpg"),
-  },
-  {
-    id: 2,
-    title: "Couch in great condition",
-    price: "$1000",
-    image: require("../assets/couch.jpg"),
-  },
-];
+function ListingsScreen({ navigation }) {
+  const [listings, setListings] = useState([]);
 
-function ListingsScreen(props) {
-  const [listings, setListings] = useState(initial_listings);
+  const [error, setError] = useState();
+
+  const [loading, setLoading] = useState();
+
+  useEffect(() => {
+    loadListings();
+  }, []);
+
+  const loadListings = async () => {
+    setLoading(true);
+    const response = await listingsAPI.getListings();
+    setLoading(false);
+
+    setError(!response.ok);
+
+    setListings(response.data);
+  };
+
   const [refreshing, setRefreshing] = useState(false);
   return (
     <Screen style={styles.screen}>
+      {error && (
+        <>
+          <AppText>Listings could not be retrieved.</AppText>
+          <AppButton title="Retry" onPress={loadListings} />
+        </>
+      )}
+      <ActivityIndicator visible={loading} />
       <FlatList
         style={styles.list}
         data={listings}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Card
-            image={item.image}
+            imageURL={item.images[0].url}
             title={item.title}
             description={item.price}
+            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           ></Card>
         )}
         refreshing={refreshing}
         onRefresh={() => {
-          setListings([
-            {
-              id: 3,
-              title: "Couch in poor condition",
-              price: "$500",
-              image: require("../assets/couch.jpg"),
-            },
-          ]);
+          loadListings;
         }}
       />
     </Screen>
@@ -62,6 +74,6 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   screen: {
-    backgroundColor: colors.grey,
+    backgroundColor: colors.light,
   },
 });

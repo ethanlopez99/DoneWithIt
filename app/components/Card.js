@@ -1,19 +1,22 @@
 import React from "react";
 import { View, StyleSheet, Image, Text } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
 
-function Card(props) {
+function Card({ imageURL, title, description, onPress }) {
   return (
-    <View style={styles.card_container}>
-      <Image source={props.image} style={styles.image}></Image>
-      <View style={styles.details_container}>
-        <Text style={[styles.text, { color: "black", marginBottom: 7 }]}>
-          {props.title}
-        </Text>
-        <Text style={[styles.text, { color: "green", fontWeight: "bold" }]}>
-          {props.description}
-        </Text>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={styles.card_container}>
+        <Image source={{ uri: imageURL }} style={styles.image} />
+        <View style={styles.details_container}>
+          <Text style={[styles.text, { color: "black", marginBottom: 7 }]}>
+            {title}
+          </Text>
+          <Text style={[styles.text, { color: "green", fontWeight: "bold" }]}>
+            ${description}
+          </Text>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 

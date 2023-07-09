@@ -5,7 +5,7 @@ import colors from "../config/colors";
 import defaultStyles from "../config/styles";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function AppTextInput({ icon, placeholder, width, ...otherProps }) {
+function AppTextInput({ icon, placeholder, width = "100%", ...otherProps }) {
   return (
     <View style={[styles.container, { width: width }]}>
       {icon && (
@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
     borderRadius: 25,
     flexDirection: "row",
-    width: "100%",
     padding: 15,
     marginTop: 10,
     alignItems: "flex-start",

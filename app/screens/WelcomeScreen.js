@@ -4,7 +4,9 @@ import colors from "../config/colors";
 import AppButton from "../components/AppButton";
 import AppText from "../components/AppText";
 
-function WelcomeScreen(props) {
+import routes from "../navigation/routes";
+
+function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground
       source={require("../assets/background.jpg")}
@@ -25,10 +27,14 @@ function WelcomeScreen(props) {
       <View style={styles.button_container}>
         <AppButton
           color={colors.primary}
-          onPress={() => console.log("Tapped")}
+          onPress={() => navigation.navigate(routes.LOGIN)}
           title="LOGIN"
         ></AppButton>
-        <AppButton color={colors.secondary} title="REGISTER"></AppButton>
+        <AppButton
+          color={colors.secondary}
+          title="REGISTER"
+          onPress={() => navigation.navigate(routes.REGISTER)}
+        ></AppButton>
       </View>
     </ImageBackground>
   );
