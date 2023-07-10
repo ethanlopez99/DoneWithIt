@@ -1,18 +1,26 @@
 import React from "react";
-import { View, StyleSheet, Image, Text } from "react-native";
-import { TouchableWithoutFeedback } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 
-function Card({ imageURL, title, description, onPress }) {
+import { Image } from "react-native-expo-image-cache";
+import Text from "./Text";
+import colors from "../config/colors";
+
+function Card({ title, subTitle, imageUrl, onPress, thumbnailUrl }) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={styles.card_container}>
-        <Image source={{ uri: imageURL }} style={styles.image} />
-        <View style={styles.details_container}>
-          <Text style={[styles.text, { color: "black", marginBottom: 7 }]}>
+      <View style={styles.card}>
+        <Image
+          style={styles.image}
+          tint="light"
+          preview={{ uri: thumbnailUrl }}
+          uri={imageUrl}
+        />
+        <View style={styles.detailsContainer}>
+          <Text style={styles.title} numberOfLines={1}>
             {title}
           </Text>
-          <Text style={[styles.text, { color: "green", fontWeight: "bold" }]}>
-            ${description}
+          <Text style={styles.subTitle} numberOfLines={2}>
+            {subTitle}
           </Text>
         </View>
       </View>
@@ -20,23 +28,27 @@ function Card({ imageURL, title, description, onPress }) {
   );
 }
 
-export default Card;
-
 const styles = StyleSheet.create({
-  card_container: {
-    borderRadius: 20,
-    backgroundColor: "#fff",
+  card: {
+    borderRadius: 15,
+    backgroundColor: colors.white,
     marginBottom: 20,
     overflow: "hidden",
   },
-  details_container: {
+  detailsContainer: {
     padding: 20,
-  },
-  text: {
-    fontSize: 15,
   },
   image: {
     width: "100%",
     height: 200,
   },
+  subTitle: {
+    color: colors.secondary,
+    fontWeight: "bold",
+  },
+  title: {
+    marginBottom: 7,
+  },
 });
+
+export default Card;

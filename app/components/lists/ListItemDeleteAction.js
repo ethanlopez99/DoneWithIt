@@ -8,13 +8,15 @@ function ListItemDeleteAction({ onPress }) {
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container}>
-        <MaterialCommunityIcons name="trash-can" size={35} color="white" />
+        <MaterialCommunityIcons
+          name="trash-can"
+          size={35}
+          color={colors.white}
+        />
       </View>
     </TouchableWithoutFeedback>
   );
 }
-
-export default ListItemDeleteAction;
 
 const styles = StyleSheet.create({
   container: {
@@ -24,3 +26,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
+
+export default ListItemDeleteAction;

@@ -1,29 +1,28 @@
 import React from "react";
-import ImageInputList from "../ImageInputList";
-import ErrorMessage from "./ErrorMessage";
-import { StyleSheet } from "react-native";
-
 import { useFormikContext } from "formik";
 
-function AppFormImagePicker({ name }) {
-  const { errors, setFieldValue, touched, values } = useFormikContext();
+import ErrorMessage from "./ErrorMessage";
+import ImageInputList from "../ImageInputList";
 
-  const imageURIs = values[name];
+function FormImagePicker({ name }) {
+  const { errors, setFieldValue, touched, values } = useFormikContext();
+  const imageUris = values[name];
+
   const handleAdd = (uri) => {
-    setFieldValue(name, [...imageURIs, uri]);
+    setFieldValue(name, [...imageUris, uri]);
   };
 
   const handleRemove = (uri) => {
     setFieldValue(
       name,
-      imageURIs.filter((imageURI) => imageURI !== uri)
+      imageUris.filter((imageUri) => imageUri !== uri)
     );
   };
 
   return (
     <>
       <ImageInputList
-        imageURIs={imageURIs}
+        imageUris={imageUris}
         onAddImage={handleAdd}
         onRemoveImage={handleRemove}
       />
@@ -32,8 +31,4 @@ function AppFormImagePicker({ name }) {
   );
 }
 
-export default AppFormImagePicker;
-
-const styles = StyleSheet.create({
-  container: {},
-});
+export default FormImagePicker;

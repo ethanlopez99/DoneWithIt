@@ -1,65 +1,58 @@
 import React from "react";
-import { ImageBackground, View, Text, Image, StyleSheet } from "react-native";
-import colors from "../config/colors";
-import AppButton from "../components/AppButton";
-import AppText from "../components/AppText";
+import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
 
+import Button from "../components/Button";
 import routes from "../navigation/routes";
 
 function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground
+      blurRadius={10}
+      style={styles.background}
       source={require("../assets/background.jpg")}
-      style={styles.image}
-      blurRadius={3}
     >
-      <View style={styles.logo_container}>
-        <Image source={require("../assets/logo-red.png")} style={styles.logo} />
-        <AppText
-          style={{
-            color: "black",
-            margin: 20,
-          }}
-        >
-          Sell What you don't need
-        </AppText>
+      <View style={styles.logoContainer}>
+        <Image style={styles.logo} source={require("../assets/logo-red.png")} />
+        <Text style={styles.tagline}>Sell What You Don't Need</Text>
       </View>
-      <View style={styles.button_container}>
-        <AppButton
-          color={colors.primary}
+      <View style={styles.buttonsContainer}>
+        <Button
+          title="Login"
           onPress={() => navigation.navigate(routes.LOGIN)}
-          title="LOGIN"
-        ></AppButton>
-        <AppButton
-          color={colors.secondary}
-          title="REGISTER"
+        />
+        <Button
+          title="Register"
+          color="secondary"
           onPress={() => navigation.navigate(routes.REGISTER)}
-        ></AppButton>
+        />
       </View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  image: {
+  background: {
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
   },
-  button_container: {
-    position: "absolute",
-    bottom: 10,
-    width: "95%",
-    alignItems: "center",
+  buttonsContainer: {
+    padding: 20,
+    width: "100%",
   },
   logo: {
     width: 100,
     height: 100,
   },
-  logo_container: {
+  logoContainer: {
     position: "absolute",
-    top: 100,
+    top: 70,
     alignItems: "center",
+  },
+  tagline: {
+    fontSize: 25,
+    fontWeight: "600",
+    paddingVertical: 20,
   },
 });
 

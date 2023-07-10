@@ -1,82 +1,69 @@
 import React from "react";
-
-import {
-  Text,
-  Image,
-  View,
-  StyleSheet,
-  TouchableHighlight,
-} from "react-native";
-
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+import Text from "../Text";
 import colors from "../../config/colors";
 
 function ListItem({
-  renderRightActions,
-  onPress,
-  image,
   title,
-  description,
-  style,
-  ImageComponent,
-  showChevron,
+  subTitle,
+  image,
+  IconComponent,
+  onPress,
+  renderRightActions,
 }) {
   return (
-    <GestureHandlerRootView style={style}>
-      <Swipeable renderRightActions={renderRightActions}>
-        <TouchableHighlight onPress={onPress} underlayColor="lightgray">
-          <View style={styles.container}>
-            {ImageComponent}
-            {image && <Image source={image} style={styles.image} />}
-            <View
-              style={{
-                marginLeft: 15,
-                justifyContent: "center",
-                flex: 1,
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }} numberOfLines={1}>
-                {title}
+    <Swipeable renderRightActions={renderRightActions}>
+      <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
+        <View style={styles.container}>
+          {IconComponent}
+          {image && <Image style={styles.image} source={image} />}
+          <View style={styles.detailsContainer}>
+            <Text style={styles.title} numberOfLines={1}>
+              {title}
+            </Text>
+            {subTitle && (
+              <Text style={styles.subTitle} numberOfLines={2}>
+                {subTitle}
               </Text>
-              {description && (
-                <Text style={{ color: "grey" }} numberOfLines={2}>
-                  {description}
-                </Text>
-              )}
-            </View>
-            {showChevron ? (
-              <MaterialCommunityIcons
-                name="chevron-right"
-                style={styles.chevron}
-                size={25}
-                color={colors.medium}
-              />
-            ) : null}
+            )}
           </View>
-        </TouchableHighlight>
-      </Swipeable>
-    </GestureHandlerRootView>
+          <MaterialCommunityIcons
+            color={colors.medium}
+            name="chevron-right"
+            size={25}
+          />
+        </View>
+      </TouchableHighlight>
+    </Swipeable>
   );
 }
 
-export default ListItem;
-
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
+    alignItems: "center",
     flexDirection: "row",
-    backgroundColor: "#fff",
+    padding: 15,
+    backgroundColor: colors.white,
+  },
+  detailsContainer: {
+    flex: 1,
+    marginLeft: 10,
+    justifyContent: "center",
   },
   image: {
-    height: 60,
-    width: 60,
-    borderRadius: 30,
+    width: 70,
+    height: 70,
+    borderRadius: 35,
   },
-  chevron: {
-    alignSelf: "center",
+  subTitle: {
+    color: colors.medium,
+  },
+  title: {
+    fontWeight: "500",
   },
 });
+
+export default ListItem;
