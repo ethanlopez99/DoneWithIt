@@ -26,7 +26,7 @@ function ListingsScreen({ navigation }) {
       {getListingsApi.error && (
         <>
           <AppText>Couldn't retrieve the listings.</AppText>
-          <Button title="Retry" onPress={getListingsApi.request} />
+          <Button title="Retry" onPress={getListingsApi.request()} />
         </>
       )}
       <ActivityIndicator visible={getListingsApi.loading} />
@@ -43,7 +43,7 @@ function ListingsScreen({ navigation }) {
           />
         )}
         refreshing={refreshing}
-        onRefresh={() => getListingsApi.request}
+        onRefresh={() => getListingsApi.request()}
       />
     </Screen>
   );

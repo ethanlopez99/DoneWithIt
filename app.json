@@ -2,26 +2,23 @@
   "expo": {
     "name": "DoneWithIt",
     "slug": "DoneWithIt",
-    "title": "DoneWithIt",
     "description": "I am done with it",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./app/assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "app/assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#FF0000"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/adaptive-icon.png",
+        "foregroundImage": "./app/assets/icon.png",
         "backgroundColor": "#ffffff"
       }
     },
