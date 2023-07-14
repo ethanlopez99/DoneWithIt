@@ -13,6 +13,8 @@ import {
 import { useState } from "react";
 
 import auth from "../api/auth";
+import useApi from "../hooks/useApi";
+import ActivityIndicator from "../components/ActivityIndicator";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
@@ -20,46 +22,64 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(4).label("Password"),
 });
 
-function RegisterScreen() {
+function RegisterScreen(props) {
+  const registerApi = useApi(auth.register);
+  const loginApi = useApi(auth.login);
+
   const [error, setError] = useState();
+  const { logIn } = useAuth();
+
+  const handleSubmit = async (userInfo) => {
+    const result = await registerApi.request(userInfo);
+    if (!result.ok) {
+      if (result.data) {
+        return setError(result.data.error);
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    }
+    const loginData = await loginApi.request(userInfo.email, userInfo.password);
+    logIn(loginData.data);
+  };
+
   return (
-    <Screen style={styles.container}>
-      <Form
-        initialValues={{ name: "", email: "", password: "" }}
-        onSubmit={async ({ name, email, password }) => {
-          const result = await auth.register(name, email, password);
-          return setError(result.data.error);
-        }}
-        validationSchema={validationSchema}
-      >
-        <ErrorMessage error={error} visible={error} />
-        <FormField
-          autoCorrect={false}
-          icon="account"
-          name="name"
-          placeholder="Name"
-        />
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="email"
-          keyboardType="email-address"
-          name="email"
-          placeholder="Email"
-          textContentType="emailAddress"
-        />
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="lock"
-          name="password"
-          placeholder="Password"
-          secureTextEntry
-          textContentType="password"
-        />
-        <SubmitButton title="Register" />
-      </Form>
-    </Screen>
+    <>
+      <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
+      <Screen style={styles.container}>
+        <Form
+          initialValues={{ name: "", email: "", password: "" }}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}
+        >
+          <ErrorMessage error={error} visible={error} />
+          <FormField
+            autoCorrect={false}
+            icon="account"
+            name="name"
+            placeholder="Name"
+          />
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="email"
+            keyboardType="email-address"
+            name="email"
+            placeholder="Email"
+            textContentType="emailAddress"
+          />
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock"
+            name="password"
+            placeholder="Password"
+            secureTextEntry
+            textContentType="password"
+          />
+          <SubmitButton title="Register" />
+        </Form>
+      </Screen>
+    </>
   );
 }
 

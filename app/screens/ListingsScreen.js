@@ -11,8 +11,6 @@ import Screen from "../components/Screen";
 import AppText from "../components/Text";
 import useApi from "../hooks/useApi";
 
-import NetInfo, { useNetInfo } from "@react-native-community/netinfo";
-
 function ListingsScreen({ navigation }) {
   const getListingsApi = useApi(listingsApi.getListings);
   const [refreshing, setRefreshing] = useState(false);
@@ -22,30 +20,32 @@ function ListingsScreen({ navigation }) {
   }, []);
 
   return (
-    <Screen style={styles.screen}>
-      {getListingsApi.error && (
-        <>
-          <AppText>Couldn't retrieve the listings.</AppText>
-          <Button title="Retry" onPress={getListingsApi.request()} />
-        </>
-      )}
+    <>
       <ActivityIndicator visible={getListingsApi.loading} />
-      <FlatList
-        data={getListingsApi.data}
-        keyExtractor={(listing) => listing.id.toString()}
-        renderItem={({ item }) => (
-          <Card
-            title={item.title}
-            subTitle={"$" + item.price}
-            imageUrl={item.images[0].url}
-            thumbnailUrl={item.images[0].thumbnailUrl}
-            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
-          />
+      <Screen style={styles.screen}>
+        {getListingsApi.error && (
+          <>
+            <AppText>Couldn't retrieve the listings.</AppText>
+            <Button title="Retry" onPress={getListingsApi.request()} />
+          </>
         )}
-        refreshing={refreshing}
-        onRefresh={() => getListingsApi.request()}
-      />
-    </Screen>
+        <FlatList
+          data={getListingsApi.data}
+          keyExtractor={(listing) => listing.id.toString()}
+          renderItem={({ item }) => (
+            <Card
+              title={item.title}
+              subTitle={"$" + item.price}
+              imageUrl={item.images[0].url}
+              thumbnailUrl={item.images[0].thumbnailUrl}
+              onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+            />
+          )}
+          refreshing={refreshing}
+          onRefresh={() => getListingsApi.request()}
+        />
+      </Screen>
+    </>
   );
 }
 

@@ -14,7 +14,6 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [user, setUser] = useState();
-  const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
     restoreUser();
@@ -22,9 +21,9 @@ export default function App() {
 
   const restoreUser = async () => {
     const user = await authStorage.getUser();
+    if (user) setUser();
     await SplashScreen.hideAsync();
-    if (!user) return;
-    setUser(user);
+    return;
   };
 
   return (

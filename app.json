@@ -12,18 +12,28 @@
       "resizeMode": "cover",
       "backgroundColor": "#FF0000"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ethanlopez.donewithit",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.ethanlopez.donewithit"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "44f089b8-7b50-4047-97b3-d21ba1bfe83c"
+      }
     }
   }
 }
