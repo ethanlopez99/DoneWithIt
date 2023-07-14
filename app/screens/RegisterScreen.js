@@ -3,7 +3,16 @@ import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
 import Screen from "../components/Screen";
-import { Form, FormField, SubmitButton } from "../components/forms";
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  SubmitButton,
+} from "../components/forms";
+
+import { useState } from "react";
+
+import auth from "../api/auth";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required().label("Name"),
@@ -12,13 +21,18 @@ const validationSchema = Yup.object().shape({
 });
 
 function RegisterScreen() {
+  const [error, setError] = useState();
   return (
     <Screen style={styles.container}>
       <Form
         initialValues={{ name: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={async ({ name, email, password }) => {
+          const result = await auth.register(name, email, password);
+          return setError(result.data.error);
+        }}
         validationSchema={validationSchema}
       >
+        <ErrorMessage error={error} visible={error} />
         <FormField
           autoCorrect={false}
           icon="account"
